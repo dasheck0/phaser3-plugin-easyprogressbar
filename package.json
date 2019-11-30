@@ -1,0 +1,17 @@
+{
+  "name": "phaser3-plugin-easyprogressbar",
+  "version": "1.0.0",
+  "description": "This is a phaser 3 plugin for creating easy to use progressbars",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "phaser",
+    "phaser3",
+    "plugin",
+    "progressbar"
+  ],
+  "author": "Stefan Neidig <stefan@rpdev.net>",
+  "license": "MIT"
+}
