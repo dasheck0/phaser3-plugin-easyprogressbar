@@ -79,8 +79,9 @@ const progressBar = this.add.easyProgressbar(0, 0, 100, 50, {});
 ```
 
 Options can be as follows: 
+
 | Name | Explanation | Example | Default |
-| --- | --- | --- | --- |
+|:-|:-|:-|:-|
 | progress | The initial progress of the progress bar. Must be float between `0` and `1` | `0.5` | `1` |
 | orientation | Orientation of the progressbar. Can either be `horizontal` or `vertical` | `horizontal` | `horizontal`|
 | reverse | Boolean that indicates whether the progressbar operates forward or backwards. Also depends on the `orientation`. Forward direction for `horizonal` is from left to right. Forward direction for `vertical` is from top to bottom. If set to `true` it reverts the direction (right to left and bottom to top). | `true` | `false` |
