@@ -1,0 +1,6 @@
+test
+scripts
+documentation
+node_modules
+*/generated
+commitlint.config.js

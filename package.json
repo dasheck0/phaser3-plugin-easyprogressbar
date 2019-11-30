@@ -13,5 +13,8 @@
     "progressbar"
   ],
   "author": "Stefan Neidig <stefan@rpdev.net>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint-config-appcom": "^1.0.9"
+  }
 }
