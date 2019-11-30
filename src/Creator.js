@@ -29,6 +29,14 @@ export default function (x, y, width, height, options) {
   const indicatorsSize = GetValue(options, 'indicators.size', 2);
   const indicatorsDistance = GetValue(options, 'indicators.size', 0.1);
 
+  const showText = GetValue(options, 'text.enabled', false);
+  const textStyle = GetValue(options, 'text.style', false);
+  const textFormat = GetValue(options, 'text.format', progress => progress);
+  const textOriginX = GetValue(options, 'text.origin.x', 0.5);
+  const textOriginY = GetValue(options, 'text.origin.y', 0.5);
+  const textAlignX = GetValue(options, 'text.align.x', 'center');
+  const textAlignY = GetValue(options, 'text.align.y', 'center');
+
   const padding = GetValue(options, 'padding', 5);
 
   const gameObject = new EasyProgressbar(this.scene, _x, _y, _width, _height, {
@@ -46,6 +54,19 @@ export default function (x, y, width, height, options) {
       alpha: indicatorsAlpha,
       size: indicatorsSize,
       distance: indicatorsDistance
+    },
+    text: {
+      enabled: showText,
+      format: textFormat,
+      style: textStyle,
+      origin: {
+        x: textOriginX,
+        y: textOriginY
+      },
+      align: {
+        x: textAlignX,
+        y: textAlignY
+      }
     },
     padding,
   });

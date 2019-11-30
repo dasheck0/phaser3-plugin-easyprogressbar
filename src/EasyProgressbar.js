@@ -25,6 +25,14 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
     this.indicatorsSize = options.indicators.size;
     this.indicatorsDistance = options.indicators.distance;
 
+    this.textShow = options.text.enabled;
+    this.textFormat = options.text.format;
+    this.textStyle = options.text.style;
+    this.textOriginX = options.text.origin.x;
+    this.textOriginY = options.text.origin.y;
+    this.textAlignX = options.text.align.x;
+    this.textAlignY = options.text.align.y;
+
     this.shadeColor = this._getShadeColor();
     this.tintColor = this._getTintColor();
 
@@ -32,14 +40,82 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
 
     scene.add.existing(this);
 
-    this.drawProgressbar();
+    this._drawProgressbar();
+
+    if (this.textShow) {
+      this.text = this.scene.add.text(this.x, this.y, this.textFormat(this.progress), this.textStyle);
+      this.text.setOrigin(this.textOriginX, this.textOriginY);
+
+      this.setTextAlign({ x: this.textAlignX, y: this.textAlignY });
+    }
   }
 
-  drawProgressbar() {
+  setPosition(x, y) {
+    super.setPosition(x, y);
+
+    if (this.text) {
+      this.text.setPosition(x, y);
+      this.setTextAlign({ x: this.textAlignX, y: this.textAlignY });
+    }
+  }
+
+  setProgress(progress, animate = false) {
+
+    if (!animate) {
+      this.progress = Math.max(Math.min(progress, 1), 0);
+      this._drawProgressbar();
+    } else {
+      const tween = this.scene.tweens.add({
+        targets: this,
+        progress: { from: this.progress, to: EasyProgressbar._limitProgress(progress) },
+        onUpdate: function () {
+          this._drawProgressbar();
+        },
+        onUpdateScope: this,
+        onComplete: function () {
+          tween.remove();
+        },
+        ease: 'Cubic.Out',
+        duration: 300,
+        repeat: 0,
+        yoyo: false
+      });
+    }
+  }
+
+  setText(text) {
+    if (this.text) {
+      this.text.text = text;
+    }
+  }
+
+  setTextAlign(align) {
+    if (this.text && align) {
+      const allowedAligns = [
+        { name: 'start', value: 0 },
+        { name: 'center', value: 0.5 },
+        { name: 'end', value: 1 }
+      ];
+
+      const x = allowedAligns.find(entry => entry.name === align.x);
+      if (x) {
+        this.text.x = this.width * x.value + this.x;
+      }
+
+      const y = allowedAligns.find(entry => entry.name === align.y);
+      if (y) {
+        this.text.y = this.height * y.value + this.y;
+      }
+    }
+  }
+
+  _drawProgressbar() {
     this.clear();
 
     this.fillStyle(this.backgroundColor, this.backgroundAlpha);
-    this.fillRoundedRect(this.x, this.y, this.width, this.height, this.radius);
+    this.fillRoundedRect(0, 0, this.width, this.height, this.radius);
+
+    this._updateProgressText();
 
     if (this.progress > 0) {
       if (this.flat) {
@@ -114,46 +190,25 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
     }
   }
 
-  setProgress(progress, animate = false) {
-    if (!animate) {
-      this.progress = Math.max(Math.min(progress, 1), 0);
-      this.drawProgressbar();
-    } else {
-      const tween = this.scene.tweens.add({
-        targets: this,
-        progress: { from: this.progress, to: this._limitProgress(progress) },
-        onUpdate: function () {
-          this.drawProgressbar();
-        },
-        onUpdateScope: this,
-        onComplete: function () {
-          tween.remove();
-        },
-        ease: 'Cubic.Out',
-        duration: 300,
-        repeat: 0,
-        yoyo: false
-      });
+  _updateProgressText() {
+    if (this.text) {
+      this.text.text = this.textFormat(this.progress);
     }
-  }
-
-  _limitProgress(progress) {
-    return Math.max(Math.min(progress, 1), 0);
   }
 
   _getForeGroundRectangleFromOrientation() {
     if (this.orientation === 'vertical') {
       return {
-        x: this.x + this.padding,
-        y: this.y + this.padding + (this.reverse ? (1 - this.progress) * (this.height - 2 * this.padding) : 0),
+        x: 0 + this.padding,
+        y: 0 + this.padding + (this.reverse ? (1 - this.progress) * (this.height - 2 * this.padding) : 0),
         width: this.width - 2 * this.padding,
         height: (this.height - 2 * this.padding) * this.progress
       };
     }
 
     return {
-      x: this.x + this.padding + (this.reverse ? (1 - this.progress) * (this.width - 2 * this.padding) : 0),
-      y: this.y + this.padding,
+      x: 0 + this.padding + (this.reverse ? (1 - this.progress) * (this.width - 2 * this.padding) : 0),
+      y: 0 + this.padding,
       width: (this.width - 2 * this.padding) * this.progress,
       height: this.height - 2 * this.padding
     };
@@ -187,5 +242,9 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
     const color = Phaser.Display.Color.ValueToColor(this.color);
     color.lighten(25);
     return Phaser.Display.Color.GetColor(color.red, color.green, color.blue);
+  }
+
+  static _limitProgress(progress) {
+    return Math.max(Math.min(progress, 1), 0);
   }
 }
