@@ -1,7 +1,7 @@
 # phaser3-plugin-easyprogressbar
 This is a phaser 3 plugin for creating easy to use progressbars.
 
-[](./art/demo.png)
+![](https://github.com/dasheck0/phaser3-plugin-easyprogressbar/blob/develop/art/demo.png)
 
 ## Usage
 <!-- section: Usage -->
