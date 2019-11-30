@@ -130,13 +130,15 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
         const space = ((vertical ? this.width : this.height) - 2 * this.padding) * distanceInPercent;
         const rect = this._getForeGroundRectangleFromOrientation();
 
+        console.log("space", space, this.radius, rect.height)
+
         /* middle */
         this.fillStyle(this.color, 1);
         this.fillRect(
-          vertical ? rect.x + space : rect.x,
-          vertical ? rect.y : rect.y + space,
-          vertical ? rect.width - 2 * space : rect.width,
-          vertical ? rect.height : rect.height - 2 * space
+          vertical ? rect.x + Math.max(this.radius, space) : rect.x,
+          vertical ? rect.y : rect.y + Math.max(this.radius, space),
+          vertical ? rect.width - 2 * Math.max(space, this.radius) : rect.width,
+          vertical ? rect.height : rect.height - 2 * Math.max(space, this.radius)
         );
 
         /* top */
@@ -144,8 +146,8 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
         this.fillRoundedRect(
           vertical ? rect.x : rect.x,
           vertical ? rect.y : rect.y,
-          vertical ? space : rect.width,
-          vertical ? rect.height : space,
+          vertical ? Math.max(space, this.radius) : rect.width,
+          vertical ? rect.height : Math.max(space, this.radius),
           {
             br: 0,
             bl: vertical ? radii.bl : 0,
@@ -157,10 +159,10 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
         /* bottom */
         this.fillStyle(this.shadeColor, 1);
         this.fillRoundedRect(
-          vertical ? rect.x + rect.width - space : rect.x,
-          vertical ? rect.y : rect.y + rect.height - space,
-          vertical ? space : rect.width,
-          vertical ? rect.height : space,
+          vertical ? rect.x + rect.width - Math.max(space, this.radius) : rect.x,
+          vertical ? rect.y : rect.y + rect.height - Math.max(space, this.radius),
+          vertical ? Math.max(space, this.radius) : rect.width,
+          vertical ? rect.height : Math.max(space, this.radius),
           {
             tr: vertical ? radii.tr : 0,
             tl: 0,
@@ -178,7 +180,7 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
         this.fillStyle(this.indicatorsColor, this.indicatorsAlpha);
         const rect = this._getForeGroundRectangleFromOrientation();
 
-        for (let i = 0; i < (vertical ? rect.height / stepSize : rect.width / stepSize); i += 1) {
+        for (let i = 1; i < (vertical ? rect.height / stepSize : rect.width / stepSize); i += 1) {
           this.fillRect(
             vertical ? rect.x : rect.x + i * stepSize,
             vertical ? rect.y + i * stepSize : rect.y,

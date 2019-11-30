@@ -4,8 +4,6 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 export default function (x, y, width, height, options) {
-  console.log("x,", x, y, width, height, options);
-
   const _x = x || 0;
   const _y = y || 0;
   const _width = width || 100;
@@ -16,7 +14,7 @@ export default function (x, y, width, height, options) {
   const orientation = GetValue(options, 'orientation', 'horizontal');
   const reverse = GetValue(options, 'reverse', false);
 
-  const radius = GetValue(options, 'radius', 0);
+  const radius = Math.min(GetValue(options, 'radius', 0), orientation === 'horizontal' ? _height / 2 : _width / 2);
 
   const backgroundColor = GetValue(options, 'backgroundColor', 0x000000);
   const backgroundAlpha = GetValue(options, 'backgroundAlpha', 0.5);
@@ -27,7 +25,7 @@ export default function (x, y, width, height, options) {
   const indicatorsColor = GetValue(options, 'indicators.color', 0x000000);
   const indicatorsAlpha = GetValue(options, 'indicators.alpha', 0.1);
   const indicatorsSize = GetValue(options, 'indicators.size', 2);
-  const indicatorsDistance = GetValue(options, 'indicators.size', 0.1);
+  const indicatorsDistance = GetValue(options, 'indicators.distance', 0.1);
 
   const showText = GetValue(options, 'text.enabled', false);
   const textStyle = GetValue(options, 'text.style', false);
