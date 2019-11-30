@@ -14,7 +14,8 @@ module.exports = {
     filename: '[name].js',
     library: 'EasyProgressbarPlugin',
     libraryTarget: 'umd',
-    umdNamedDefine: true
+    umdNamedDefine: true,
+    auxiliaryComment: `Last build: ${new Date()}`
   },
   plugins: [
     new CleanWebpackPlugin(),
