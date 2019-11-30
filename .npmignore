@@ -59,6 +59,12 @@ typings/
 # dotenv environment variables file
 .env
 
-dist/demo
-
+art
+demo
+src
+.editorconfig
+.eslintignore
+.eslintrc
+.gitignore
+webpack.*
 
