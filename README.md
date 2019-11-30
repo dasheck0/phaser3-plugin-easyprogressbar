@@ -1,5 +1,13 @@
 # phaser3-plugin-easyprogressbar
-This is a phaser 3 plugin for creating easy to use progressbars.
+This is a phaser 3 plugin for creating easy to use and beautiful progressbars. Easy progressbars support:
+
+* Horizontal and vertical layout
+* Forward and backward progress
+* Flat and shiny design
+* Rounded progressbars
+* Customizable progress text
+* Adding and styling indicators
+* Animating progress 
 
 ![](https://github.com/dasheck0/phaser3-plugin-easyprogressbar/blob/develop/art/demo.png)
 
@@ -16,9 +24,6 @@ This is a phaser 3 plugin for creating easy to use progressbars.
 <!-- Briefly describe how other developers can use your library. Make it as short as possible and rely on package managers (e.g. npm, conan, gradle, ...). Assume that they are known when refering to your target (developer) audience. -->
 
 ## Contributing
-<!-- section: Contributing -->
-<!-- Describe what action one should take in order to contribute. Does a certain styleguide has to be adhered. How can one apply changes (i.e. push vs. pull request)? -->
-
 Bug reports and pull requests are welcome on GitHub at [https://github.com/dasheck0/phaser3-plugin-easyprogressbar/pulls](https://github.com/dasheck0/phaser3-plugin-easyprogressbar/pulls). This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
 
 ## License
