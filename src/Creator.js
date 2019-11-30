@@ -22,6 +22,7 @@ export default function (x, y, width, height, options) {
   const backgroundAlpha = GetValue(options, 'backgroundAlpha', 0.5);
 
   const color = GetValue(options, 'color', 0xffffff);
+  const flat = GetValue(options, 'flat', false);
 
   const padding = GetValue(options, 'padding', 5);
 
@@ -33,6 +34,7 @@ export default function (x, y, width, height, options) {
     backgroundColor,
     backgroundAlpha,
     color,
+    flat,
     padding,
   });
 

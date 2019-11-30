@@ -2,8 +2,6 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
   constructor(scene, x, y, width, height, options = {}) {
     super(scene);
 
-    console.log("nfdj,", x, y, width, height, options);
-
     this.setPosition(x, y);
     this.width = width;
     this.height = height;
@@ -19,6 +17,9 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
     this.backgroundAlpha = options.backgroundAlpha;
 
     this.color = options.color;
+    this.flat = options.flat;
+    this.shadeColor = this._getShadeColor();
+    this.tintColor = this._getTintColor();
 
     this.padding = options.padding;
 
@@ -33,10 +34,57 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
     this.fillStyle(this.backgroundColor, this.backgroundAlpha);
     this.fillRoundedRect(this.x, this.y, this.width, this.height, this.radius);
 
-    this.fillStyle(this.color, 1);
+    if (this.progress > 0) {
+      if (this.flat) {
+        const rect = this._getForeGroundRectangleFromOrientation();
+        this.fillRoundedRect(rect.x, rect.y, rect.width, rect.height, this._getForegroundRadiiFromOrientation());
+      } else {
+        const radii = this._getForegroundRadiiFromOrientation();
+        const vertical = this.orientation === 'vertical';
+        const distanceInPercent = 0.1;
+        const space = ((vertical ? this.width : this.height) - 2 * this.padding) * distanceInPercent;
+        const rect = this._getForeGroundRectangleFromOrientation();
 
-    const rect = this._getForeGroundRectangleFromOrientation();
-    this.fillRoundedRect(rect.x, rect.y, rect.width, rect.height, this._getForegroundRadiiFromOrientation());
+        /* middle */
+        this.fillStyle(this.color, 1);
+        this.fillRect(
+          vertical ? rect.x + space : rect.x,
+          vertical ? rect.y : rect.y + space,
+          vertical ? rect.width - 2 * space : rect.width,
+          vertical ? rect.height : rect.height - 2 * space
+        );
+
+        /* top */
+        this.fillStyle(this.tintColor, 1);
+        this.fillRoundedRect(
+          vertical ? rect.x : rect.x,
+          vertical ? rect.y : rect.y,
+          vertical ? space : rect.width,
+          vertical ? rect.height : space,
+          {
+            br: 0,
+            bl: vertical ? radii.bl : 0,
+            tr: vertical ? 0 : radii.tr,
+            tl: radii.tl
+          }
+        );
+
+        /* bottom */
+        this.fillStyle(this.shadeColor, 1);
+        this.fillRoundedRect(
+          vertical ? rect.x + rect.width - space : rect.x,
+          vertical ? rect.y : rect.y + rect.height - space,
+          vertical ? space : rect.width,
+          vertical ? rect.height : space,
+          {
+            tr: vertical ? radii.tr : 0,
+            tl: 0,
+            br: radii.br,
+            bl: vertical ? 0 : radii.bl
+          }
+        );
+      }
+    }
   }
 
   setProgress(progress) {
@@ -78,5 +126,17 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
       br: this.reverse ? this.radius : ((this.progress < 1) ? 0 : this.radius),
       tr: this.reverse ? this.radius : ((this.progress < 1) ? 0 : this.radius)
     };
+  }
+
+  _getShadeColor() {
+    const color = Phaser.Display.Color.ValueToColor(this.color);
+    color.darken(10);
+    return Phaser.Display.Color.GetColor(color.red, color.green, color.blue);
+  }
+
+  _getTintColor() {
+    const color = Phaser.Display.Color.ValueToColor(this.color);
+    color.lighten(25);
+    return Phaser.Display.Color.GetColor(color.red, color.green, color.blue);
   }
 }
