@@ -69,11 +69,10 @@ export default function (x, y, width, height, options) {
     padding,
   });
 
-  BuildGameObject(this.scene, gameObject, {
+  BuildGameObject(this.scene, gameObject, Object.assign(options, {
     x: _x,
     y: _y,
-    ...options,
     add: true
-  });
+  }));
   return gameObject;
 }

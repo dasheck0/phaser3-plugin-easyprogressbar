@@ -130,8 +130,6 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
         const space = ((vertical ? this.width : this.height) - 2 * this.padding) * distanceInPercent;
         const rect = this._getForeGroundRectangleFromOrientation();
 
-        console.log("space", space, this.radius, rect.height)
-
         /* middle */
         this.fillStyle(this.color, 1);
         this.fillRect(
