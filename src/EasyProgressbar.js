@@ -18,6 +18,13 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
 
     this.color = options.color;
     this.flat = options.flat;
+
+    this.indicatorsEnabled = options.indicators.enabled;
+    this.indicatorsColor = options.indicators.color;
+    this.indicatorsAlpha = options.indicators.alpha;
+    this.indicatorsSize = options.indicators.size;
+    this.indicatorsDistance = options.indicators.distance;
+
     this.shadeColor = this._getShadeColor();
     this.tintColor = this._getTintColor();
 
@@ -36,6 +43,8 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
 
     if (this.progress > 0) {
       if (this.flat) {
+        this.fillStyle(this.color, 1);
+
         const rect = this._getForeGroundRectangleFromOrientation();
         this.fillRoundedRect(rect.x, rect.y, rect.width, rect.height, this._getForegroundRadiiFromOrientation());
       } else {
@@ -83,6 +92,24 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
             bl: vertical ? 0 : radii.bl
           }
         );
+      }
+
+      if (this.indicatorsEnabled) {
+        const vertical = this.orientation === 'vertical';
+        const step = this.indicatorsDistance;
+        const stepSize = (vertical ? this.height * step : this.width * step);
+
+        this.fillStyle(this.indicatorsColor, this.indicatorsAlpha);
+        const rect = this._getForeGroundRectangleFromOrientation();
+
+        for (let i = 0; i < (vertical ? rect.height / stepSize : rect.width / stepSize); i += 1) {
+          this.fillRect(
+            vertical ? rect.x : rect.x + i * stepSize,
+            vertical ? rect.y + i * stepSize : rect.y,
+            vertical ? rect.width : this.indicatorsSize,
+            vertical ? this.indicatorsSize : rect.height
+          )
+        }
       }
     }
   }

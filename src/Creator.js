@@ -23,6 +23,11 @@ export default function (x, y, width, height, options) {
 
   const color = GetValue(options, 'color', 0xffffff);
   const flat = GetValue(options, 'flat', false);
+  const indicatorsEnabled = GetValue(options, 'indicators.enabled', false);
+  const indicatorsColor = GetValue(options, 'indicators.color', 0x000000);
+  const indicatorsAlpha = GetValue(options, 'indicators.alpha', 0.1);
+  const indicatorsSize = GetValue(options, 'indicators.size', 2);
+  const indicatorsDistance = GetValue(options, 'indicators.size', 0.1);
 
   const padding = GetValue(options, 'padding', 5);
 
@@ -35,6 +40,13 @@ export default function (x, y, width, height, options) {
     backgroundAlpha,
     color,
     flat,
+    indicators: {
+      enabled: indicatorsEnabled,
+      color: indicatorsColor,
+      alpha: indicatorsAlpha,
+      size: indicatorsSize,
+      distance: indicatorsDistance
+    },
     padding,
   });
 
