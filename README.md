@@ -12,16 +12,40 @@ This is a phaser 3 plugin for creating easy to use and beautiful progressbars. E
 ![](https://github.com/dasheck0/phaser3-plugin-easyprogressbar/blob/develop/art/demo.png)
 
 ## Usage
-<!-- section: Usage -->
-<!-- Show how to use it with a code example. Focus on the key features and do not include too much (that is for the Wiki). Also do not delve into the API to much. We'll get to that -->
+```
+import EasyProgressbarPlugin from EasyProgressbarPlugin';
+
+const game = new Phaser.Game({
+  width: 1024,
+  height: 768,
+  scene: [MainScene],
+  backgroundColor: 0x00ff00,
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH
+  },
+  plugins: {
+    global: [{
+      key: 'EasyProgressbarPlugin',
+      plugin: EasyProgressbarPlugin,
+      start: true
+    }]
+  }
+});
+
+
+```
 
 ## API
 <!-- section: API -->
 <!-- Describe the API of your module / library such that other developers know how to interact with it. -->
 
 ## Installation
-<!-- section: Installation --> 
-<!-- Briefly describe how other developers can use your library. Make it as short as possible and rely on package managers (e.g. npm, conan, gradle, ...). Assume that they are known when refering to your target (developer) audience. -->
+```
+npm i phaser3-plugin-easyprogressbar
+```
+
+Alternatively you can grab the latest distributed version directly from github via: [https://raw.githubusercontent.com/dasheck0/phaser3-plugin-easyprogressbar/master/dist/EasyProgressbarPlugin.js](https://raw.githubusercontent.com/dasheck0/phaser3-plugin-easyprogressbar/master/dist/EasyProgressbarPlugin.js)
 
 ## Contributing
 Bug reports and pull requests are welcome on GitHub at [https://github.com/dasheck0/phaser3-plugin-easyprogressbar/pulls](https://github.com/dasheck0/phaser3-plugin-easyprogressbar/pulls). This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.

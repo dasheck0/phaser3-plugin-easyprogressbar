@@ -2,8 +2,9 @@
   "name": "phaser3-plugin-easyprogressbar",
   "version": "1.0.0",
   "description": "This is a phaser 3 plugin for creating easy to use progressbars",
-  "main": "index.js",
+  "main": "dist/EasyProgressbarPlugin.js",
   "scripts": {
+    "prepublish": "npm run build:production",
     "build:production": "webpack --env production",
     "start:demo": "webpack-dev-server --env demo"
   },
