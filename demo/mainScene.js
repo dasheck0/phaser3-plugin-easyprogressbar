@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import Plugin from "../src/index";
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
@@ -6,6 +7,7 @@ export default class MainScene extends Phaser.Scene {
   }
 
   preload() {
+   // this.load.scenePlugin('plugin', Plugin);
   }
 
   create() {
@@ -13,6 +15,5 @@ export default class MainScene extends Phaser.Scene {
   }
 
   update(time, delta) {
-
   }
 }
