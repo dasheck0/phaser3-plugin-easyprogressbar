@@ -1,6 +1,8 @@
 # phaser3-plugin-easyprogressbar
 This is a phaser 3 plugin for creating easy to use progressbars.
 
+[](./art/demo.png)
+
 ## Usage
 <!-- section: Usage -->
 <!-- Show how to use it with a code example. Focus on the key features and do not include too much (that is for the Wiki). Also do not delve into the API to much. We'll get to that -->
