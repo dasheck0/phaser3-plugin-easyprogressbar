@@ -104,7 +104,15 @@ Options can be as follows:
 | text.align.y| The vertical alignment of the text within the progressbar. Must be either `start`, `center` or `end`| `end`| `center`|
 | text.padding| The padding of the foreground progressbar to its background| `2`| `5`|
 
+```javascript
+const progressBar = this.add.easyProgressbar(0, 0, 100, 50, options);
 
+// without animation
+progressBar.setProgress(0.2);
+
+// with animation
+progressBar.setProgress(0.8, true);
+```
 ## Installation
 ```
 npm i phaser3-plugin-easyprogressbar
