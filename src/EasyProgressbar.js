@@ -114,9 +114,31 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
     }
   }
 
-  setProgress(progress) {
-    this.progress = Math.max(Math.min(progress, 1), 0);
-    this.drawProgressbar();
+  setProgress(progress, animate = false) {
+    if (!animate) {
+      this.progress = Math.max(Math.min(progress, 1), 0);
+      this.drawProgressbar();
+    } else {
+      const tween = this.scene.tweens.add({
+        targets: this,
+        progress: { from: this.progress, to: this._limitProgress(progress) },
+        onUpdate: function () {
+          this.drawProgressbar();
+        },
+        onUpdateScope: this,
+        onComplete: function () {
+          tween.remove();
+        },
+        ease: 'Back.Out',
+        duration: 300,
+        repeat: 0,
+        yoyo: false
+      });
+    }
+  }
+
+  _limitProgress(progress) {
+    return Math.max(Math.min(progress, 1), 0);
   }
 
   _getForeGroundRectangleFromOrientation() {
