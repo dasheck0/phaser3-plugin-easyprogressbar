@@ -129,7 +129,7 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
         onComplete: function () {
           tween.remove();
         },
-        ease: 'Back.Out',
+        ease: 'Cubic.Out',
         duration: 300,
         repeat: 0,
         yoyo: false
