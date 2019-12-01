@@ -1,6 +1,6 @@
 import 'phaser';
 
-import EasyProgressbarPlugin from '../dist/EasyProgressbarPlugin';
+import EasyProgressbarPlugin from '../src/index';
 import MainScene from "./mainScene";
 
 const game = new Phaser.Game({

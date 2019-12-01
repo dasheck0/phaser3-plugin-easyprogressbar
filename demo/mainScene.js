@@ -81,9 +81,13 @@ export default class MainScene extends Phaser.Scene {
             stroke: true,
             fill: true
           }
+
         }
       }
     });
+    console.log("F>iU)§IUO");
+    experienceProgressbar.destroy();
+    console.log("948756784");
 
     const count = 7;
     for (let x = 100; x <= 500; x += 2 * 400 / (2 * count - 1)) {

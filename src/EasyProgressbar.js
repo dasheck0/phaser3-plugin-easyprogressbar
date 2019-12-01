@@ -50,6 +50,14 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
     }
   }
 
+  destroy() {
+    super.destroy();
+
+    if(this.text) {
+      this.text.destroy();
+    }
+  }
+
   setPosition(x, y) {
     super.setPosition(x, y);
 
