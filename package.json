@@ -1,6 +1,6 @@
 {
   "name": "phaser3-plugin-easyprogressbar",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This is a phaser 3 plugin for creating easy to use progressbars",
   "main": "dist/EasyProgressbarPlugin.js",
   "scripts": {
@@ -18,8 +18,8 @@
   "author": "Stefan Neidig <stefan@rpdev.net>",
   "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/dasheck0/phaser3-plugin-easyprogressbar"
+    "type": "git",
+    "url": "https://github.com/dasheck0/phaser3-plugin-easyprogressbar"
   },
   "peerDependencies": {
     "phaser": "3.x"
