@@ -6,7 +6,7 @@
   "scripts": {
     "build:production": "webpack --env production",
     "start:demo": "webpack-dev-server --env demo",
-    "deploy": "cross-var git flow release start $npm_package_version && npm run build:production && cross-var git commit --allow-empty -am \"Prepare release $npm_package_version\" && cross-var git flow release finish -m \"$npm_package_version\" $npm_package_version && npm publish && git push origin master",
+    "deploy": "cross-var git flow release start $npm_package_version && npm run build:production && cross-var git commit --allow-empty -am \"Prepare release $npm_package_version\" && cross-var git flow release finish -m \"$npm_package_version\" $npm_package_version && npm publish && git push origin master --tags",
     "deploy:fast": "npm run deploy && git checkout develop"
   },
   "keywords": [
