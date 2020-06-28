@@ -1,6 +1,6 @@
 {
   "name": "phaser3-plugin-easyprogressbar",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "This is a phaser 3 plugin for creating easy to use progressbars",
   "main": "dist/EasyProgressbarPlugin.js",
   "scripts": {
