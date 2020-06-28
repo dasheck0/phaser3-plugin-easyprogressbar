@@ -1,14 +1,14 @@
 (function webpackUniversalModuleDefinition(root, factory) {
-	//Last build: Sun Jun 28 2020 19:39:19 GMT+0200 (GMT+02:00)
+	//Last build: Sun Jun 28 2020 20:04:19 GMT+0200 (GMT+02:00)
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
-	//Last build: Sun Jun 28 2020 19:39:19 GMT+0200 (GMT+02:00)
+	//Last build: Sun Jun 28 2020 20:04:19 GMT+0200 (GMT+02:00)
 	else if(typeof define === 'function' && define.amd)
 		define("EasyProgressbarPlugin", [], factory);
-	//Last build: Sun Jun 28 2020 19:39:19 GMT+0200 (GMT+02:00)
+	//Last build: Sun Jun 28 2020 20:04:19 GMT+0200 (GMT+02:00)
 	else if(typeof exports === 'object')
 		exports["EasyProgressbarPlugin"] = factory();
-	//Last build: Sun Jun 28 2020 19:39:19 GMT+0200 (GMT+02:00)
+	//Last build: Sun Jun 28 2020 20:04:19 GMT+0200 (GMT+02:00)
 	else
 		root["EasyProgressbarPlugin"] = factory();
 })(window, function() {
