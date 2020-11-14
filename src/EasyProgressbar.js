@@ -53,7 +53,7 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
   destroy() {
     super.destroy();
 
-    if(this.text) {
+    if (this.text) {
       this.text.destroy();
     }
   }
@@ -121,7 +121,11 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
     this.clear();
 
     this.fillStyle(this.backgroundColor, this.backgroundAlpha);
-    this.fillRoundedRect(0, 0, this.width, this.height, this.radius);
+    if (this.radius > 0) {
+      this.fillRoundedRect(0, 0, this.width, this.height, this.radius);
+    } else {
+      this.fillRect(0, 0, this.width, this.height);
+    }
 
     this._updateProgressText();
 
@@ -130,7 +134,12 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
         this.fillStyle(this.color, 1);
 
         const rect = this._getForeGroundRectangleFromOrientation();
-        this.fillRoundedRect(rect.x, rect.y, rect.width, rect.height, this._getForegroundRadiiFromOrientation());
+        if (this.radius > 0) {
+          this.fillRoundedRect(rect.x, rect.y, rect.width, rect.height, this._getForegroundRadiiFromOrientation());
+        } else {
+          this.fillRect(rect.x, rect.y, rect.width, rect.height);
+        }
+
       } else {
         const radii = this._getForegroundRadiiFromOrientation();
         const vertical = this.orientation === 'vertical';
@@ -149,33 +158,53 @@ export default class EasyProgressbar extends Phaser.GameObjects.Graphics {
 
         /* top */
         this.fillStyle(this.tintColor, 1);
-        this.fillRoundedRect(
-          vertical ? rect.x : rect.x,
-          vertical ? rect.y : rect.y,
-          vertical ? Math.max(space, this.radius) : rect.width,
-          vertical ? rect.height : Math.max(space, this.radius),
-          {
-            br: 0,
-            bl: vertical ? radii.bl : 0,
-            tr: vertical ? 0 : radii.tr,
-            tl: radii.tl
-          }
-        );
+
+        if(this.radius > 0) {
+          this.fillRoundedRect(
+            vertical ? rect.x : rect.x,
+            vertical ? rect.y : rect.y,
+            vertical ? Math.max(space, this.radius) : rect.width,
+            vertical ? rect.height : Math.max(space, this.radius),
+            {
+              br: 0,
+              bl: vertical ? radii.bl : 0,
+              tr: vertical ? 0 : radii.tr,
+              tl: radii.tl
+            }
+          );
+        } else {
+          this.fillRect(
+            vertical ? rect.x : rect.x,
+            vertical ? rect.y : rect.y,
+            vertical ? Math.max(space, this.radius) : rect.width,
+            vertical ? rect.height : Math.max(space, this.radius),
+          );
+        }
+
 
         /* bottom */
         this.fillStyle(this.shadeColor, 1);
-        this.fillRoundedRect(
-          vertical ? rect.x + rect.width - Math.max(space, this.radius) : rect.x,
-          vertical ? rect.y : rect.y + rect.height - Math.max(space, this.radius),
-          vertical ? Math.max(space, this.radius) : rect.width,
-          vertical ? rect.height : Math.max(space, this.radius),
-          {
-            tr: vertical ? radii.tr : 0,
-            tl: 0,
-            br: radii.br,
-            bl: vertical ? 0 : radii.bl
-          }
-        );
+        if(this.radius > 0) {
+          this.fillRoundedRect(
+            vertical ? rect.x + rect.width - Math.max(space, this.radius) : rect.x,
+            vertical ? rect.y : rect.y + rect.height - Math.max(space, this.radius),
+            vertical ? Math.max(space, this.radius) : rect.width,
+            vertical ? rect.height : Math.max(space, this.radius),
+            {
+              tr: vertical ? radii.tr : 0,
+              tl: 0,
+              br: radii.br,
+              bl: vertical ? 0 : radii.bl
+            }
+          );
+        } else {
+          this.fillRect(
+            vertical ? rect.x + rect.width - Math.max(space, this.radius) : rect.x,
+            vertical ? rect.y : rect.y + rect.height - Math.max(space, this.radius),
+            vertical ? Math.max(space, this.radius) : rect.width,
+            vertical ? rect.height : Math.max(space, this.radius)
+          );
+        }
       }
 
       if (this.indicatorsEnabled) {
