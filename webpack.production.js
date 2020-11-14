@@ -1,6 +1,6 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const buildDir = './dist';
 
@@ -18,21 +18,24 @@ module.exports = {
     auxiliaryComment: `Last build: ${new Date()}`
   },
   plugins: [
-    new CleanWebpackPlugin(),
-    new UglifyWebpackPlugin({
-      include: /\.min\.js$/,
-      parallel: true,
-      sourceMap: false,
-      uglifyOptions: {
-        compress: true,
-        ie8: false,
-        ecma: 5,
-        output: {
-          comments: false
-        },
-        warnings: false
-      },
-      warningsFilter: (src) => false
-    })
-  ]
+    new CleanWebpackPlugin()
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        include:/\.min\.js$/,
+        parallel: true,
+        sourceMap: false,
+        terserOptions: {
+          ecma: 5,
+          compress: {},
+          warnings: false,
+          output: {
+            comments: false
+          }
+        }
+      })
+    ]
+  }
 };
